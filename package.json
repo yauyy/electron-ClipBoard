@@ -1,0 +1,35 @@
+{
+  "name": "clipboard",
+  "private": true,
+  "version": "0.0.1",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc && vite build && electron-builder",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@nut-tree-fork/nut-js": "^4.2.2",
+    "@unocss/reset": "^0.63.6",
+    "localforage": "^1.10.0",
+    "nanoid": "^5.0.7",
+    "node-key-sender": "^1.0.11",
+    "pinia": "^2.2.4",
+    "sass-embedded": "^1.80.4",
+    "uiohook-napi": "^1.5.4",
+    "vue": "^3.5.12"
+  },
+  "devDependencies": {
+    "@unocss/preset-rem-to-px": "^0.63.6",
+    "@vitejs/plugin-vue": "^5.1.4",
+    "electron": "^33.0.2",
+    "electron-builder": "^25.1.8",
+    "typescript": "^5.6.3",
+    "unocss": "^0.63.6",
+    "vite": "^5.4.10",
+    "vite-plugin-electron": "^0.28.8",
+    "vite-plugin-electron-renderer": "^0.14.6",
+    "vue-tsc": "^2.1.6"
+  },
+  "main": "dist-electron/main.js"
+}

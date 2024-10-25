@@ -1,0 +1,47 @@
+// @see - https://www.electron.build/configuration/configuration
+{
+  "$schema": "https://raw.githubusercontent.com/electron-userland/electron-builder/master/packages/app-builder-lib/scheme.json",
+  "appId": "com.electron.cv",
+  "appImage": {
+    "artifactName": "${productName}-${version}-${arch}.${ext}"
+  },
+  "asar": true,
+  "productName": "cv剪切板",
+  "directories": {
+    "output": "release/${version}"
+  },
+  "files": [
+    "dist",
+    "dist-electron"
+  ],
+  "mac": {
+    "target": [
+      "dmg"
+    ],
+    "artifactName": "${productName}-Mac-${version}-Installer.${ext}"
+  },
+  "win": {
+    "icon": "public/cv-1024.ico",
+    "target": [
+      {
+        "target": "nsis",
+        "arch": [
+          "x64"
+        ]
+      }
+    ],
+    "artifactName": "${productName}-Windows-${version}-Setup.${ext}"
+  },
+  "nsis": {
+    "oneClick": false, // 是否一键安装
+    "perMachine": false, // 安装的时候是否为所有用户安装
+    "allowToChangeInstallationDirectory": true, // 是否允许用户改变安装目录， 默认为false
+    "deleteAppDataOnUninstall": true // 是否在卸载时删除应用程序数据
+  },
+  "linux": {
+    "target": [
+      "AppImage"
+    ],
+    "artifactName": "${productName}-Linux-${version}.${ext}"
+  }
+}
