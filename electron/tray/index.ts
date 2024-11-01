@@ -1,6 +1,6 @@
 import path from 'node:path';
 import { Menu, Tray, type BrowserWindow } from 'electron';
-import { setWinPosition } from '../tools/index';
+import { createSettingWindow } from '../settingWin'
 
 // 托盘
 export function createTray(win: BrowserWindow) {
@@ -18,8 +18,7 @@ export function createTray(win: BrowserWindow) {
       label: '设置',
       click: () => {
         if (win) {
-          setWinPosition(win);
-          win.show();
+          createSettingWindow();
         }
       },
     },

@@ -25,5 +25,4 @@ contextBridge.exposeInMainWorld('ipcRenderer', {
   removeAllListeners(channel: string) {
     return ipcRenderer.removeAllListeners(channel);
   },
-  minimizeWindow: () => ipcRenderer.send('minimize-window'),
 });
