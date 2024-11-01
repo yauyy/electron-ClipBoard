@@ -1,7 +1,7 @@
 {
   "name": "clipboard",
   "private": true,
-  "version": "0.0.1",
+  "version": "0.0.3",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -12,10 +12,9 @@
     "@nut-tree-fork/nut-js": "^4.2.2",
     "@unocss/reset": "^0.63.6",
     "localforage": "^1.10.0",
-    "nanoid": "^5.0.7",
-    "node-key-sender": "^1.0.11",
-    "pinia": "^2.2.4",
-    "sass-embedded": "^1.80.4",
+    "nanoid": "^5.0.8",
+    "pinia": "^2.2.5",
+    "sass-embedded": "^1.80.5",
     "uiohook-napi": "^1.5.4",
     "vue": "^3.5.12"
   },
@@ -29,7 +28,7 @@
     "vite": "^5.4.10",
     "vite-plugin-electron": "^0.28.8",
     "vite-plugin-electron-renderer": "^0.14.6",
-    "vue-tsc": "^2.1.6"
+    "vue-tsc": "^2.1.10"
   },
   "main": "dist-electron/main.js"
 }

@@ -21,8 +21,9 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
     "paths": {
-      "@/*": ["src/*"],
-      "@types": ["src/types"]
+      "@/*": ["src/main/*"],
+      "@types": ["src/main/types"],
+
     }
   },
   "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue", "electron"],

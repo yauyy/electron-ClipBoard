@@ -8,8 +8,8 @@ import UnoCSS from 'unocss/vite';
 export default defineConfig({
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, 'src'),
-      '@types': path.resolve(__dirname, 'src/types'),
+      '@': path.resolve(__dirname, 'src/main'),
+      '@types': path.resolve(__dirname, 'src/main/types'),
     }
   },
   plugins: [
@@ -35,6 +35,15 @@ export default defineConfig({
           : {},
     }),
   ],
+  build: {
+    rollupOptions: {
+      input: {
+        main: path.resolve(__dirname, 'index.html'),
+        preload: path.resolve(__dirname, 'setting.html'),
+      },
+    }
+  },
+
   css: {
     preprocessorOptions: {
       scss: {

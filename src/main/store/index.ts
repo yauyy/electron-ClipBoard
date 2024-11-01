@@ -1,7 +1,7 @@
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 import { nanoid } from 'nanoid';
 import { defineStore } from 'pinia';
-import type { IClipboardItem, IClipboardParams, ICollectItem } from '@/types';
+import type { IClipboardItem, IClipboardParams, ICollectItem } from '@types';
 import localforageStore from './localforage';
 
 export const useCollectStore = defineStore('collect', () => {
@@ -25,7 +25,7 @@ export const useCollectStore = defineStore('collect', () => {
   function removeCollect(data: ICollectItem) {
 
     collectDataList.value = collectDataList.value.filter(
-      (item) => item.id !== data.id
+      (item: ICollectItem) => item.id !== data.id
     );
     useClipboardStore().markCollect(data);
     localforageStore.setItem(
@@ -63,24 +63,21 @@ export const useClipboardStore = defineStore('clipboard', () => {
   // 删除剪贴板
   function removeClipboard(data: IClipboardItem) {
     clipboardList.value = clipboardList.value.filter(
-      (item) => item.id !== data.id
+      (item: ICollectItem) => item.id !== data.id
     );
   }
   // 标记收藏
   function markCollect(data?: IClipboardItem, cb?: (val: IClipboardItem) => void) {
     if (!data) {
-      clipboardList.value = clipboardList.value.map((item) => {
+      clipboardList.value = clipboardList.value.map((item: IClipboardItem) => {
         item.isCollect = false;
         return item;
       });
       return;
     }
-    console.log('data', data);
 
-    clipboardList.value = clipboardList.value.map((item) => {
+    clipboardList.value = clipboardList.value.map((item: IClipboardItem) => {
       if (item.id === data.id) {
-        console.log('item==data', item);
-
         item.isCollect = !item.isCollect;
       }
       return item;
@@ -103,4 +100,31 @@ export const useClipboardStore = defineStore('clipboard', () => {
     addClipboard,
     markCollect,
   };
+});
+
+export const useSettingStore = defineStore('setting', () => {
+  const isAutoOpen = ref(window.localStorage.getItem('isAutoOpen') === 'true' || false);
+  const fastKeyboard = ref(window.localStorage.getItem('fastKeyboard') || 'ctrl+shift+v');
+
+  watch(() => isAutoOpen.value, (val) => {
+    window.ipcRenderer.send('auto-open', val);
+  });
+
+  watch(() => fastKeyboard.value, (val) => {
+    window.ipcRenderer.send('fastKeyboard', val);
+  }, { immediate: true });
+
+  window.addEventListener('storage', (event) => {
+    switch (event.key) {
+      case 'fastKeyboard':
+        fastKeyboard.value = event.newValue || '';
+        break;
+      case 'isAutoOpen':
+        isAutoOpen.value = event.newValue === 'true' ? true : false;
+        break;
+      default:
+        break;
+    }
+  });
+
 });
